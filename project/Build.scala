@@ -5,6 +5,14 @@ import AssemblyKeys._
 
 object KafkaUtilsBuild extends Build {
 
+  publishTo := {
+  val nexus = "http://maven.thebookpeople.com:8082/nexus"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "content/repositories/releases")
+}
+
   def sharedSettings = Defaults.defaultSettings ++ assemblySettings ++ Seq(
     version := "0.3.0",
     scalaVersion := "2.10.3",
