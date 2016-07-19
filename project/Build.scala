@@ -17,9 +17,9 @@ object KafkaUtilsBuild extends Build {
     publishTo := {
       val nexus = "http://maven.thebookpeople.com:8082/nexus"
       if (isSnapshot.value)
-        Some("snapshots" at nexus + "content/repositories/snapshots")
+        Some("snapshots" at nexus + "/content/repositories/snapshots")
       else
-        Some("releases"  at nexus + "content/repositories/releases")
+        Some("releases"  at nexus + "/content/repositories/releases")
     },
     resolvers ++= Seq(
       "sonatype-snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
