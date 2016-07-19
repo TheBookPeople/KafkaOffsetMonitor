@@ -5,22 +5,22 @@ import AssemblyKeys._
 
 object KafkaUtilsBuild extends Build {
 
-  publishTo := {
-  val nexus = "http://maven.thebookpeople.com:8082/nexus"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "content/repositories/releases")
-}
 
   def sharedSettings = Defaults.defaultSettings ++ assemblySettings ++ Seq(
-    version := "0.3.0",
+    version := "0.3.0-TBP",
     scalaVersion := "2.10.3",
     organization := "com.quantifind",
     scalacOptions := Seq("-deprecation", "-unchecked", "-optimize"),
     unmanagedJars in Compile <<= baseDirectory map { base => (base / "lib" ** "*.jar").classpath },
     retrieveManaged := true,
     transitiveClassifiers in Scope.GlobalScope := Seq("sources"),
+    publishTo := {
+      val nexus = "http://maven.thebookpeople.com:8082/nexus"
+      if (isSnapshot.value)
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases"  at nexus + "content/repositories/releases")
+    },
     resolvers ++= Seq(
       "sonatype-snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       "sonatype-releases" at "http://oss.sonatype.org/content/repositories/releases",
